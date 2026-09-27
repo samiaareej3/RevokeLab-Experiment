@@ -1,20 +1,28 @@
-# RevokeLab Experiment
+ # RevokeLab Experiment
 
-An independent experiment harness for testing permission revocation
-and WebSocket behavior in the RevokeLab backend.
+An independent experiment harness for testing authorization revocation on an existing WebSocket connection.
 
-## Purpose
+## What is this?
 
-The experiment connects to the RevokeLab backend as a test user,
-observes an existing WebSocket connection, revokes the user's
-project membership, creates new private data, and records whether
-the revoked user continues receiving that data.
+RevokeLab tests what happens when a user's project access is removed while they already have an active WebSocket connection.
 
-## Backend
+The experiment focuses on one question:
 
-RevokeLab backend:
-https://revokelab.onrender.com
+> After Alice's access to Project Red is revoked, can she still receive newly created private messages through her existing WebSocket connection?
 
-## Status
+## Experiment Flow
 
-Experiment harness under development.
+```text
+Alice has Project Red access
+          ↓
+Alice opens a WebSocket connection
+          ↓
+Admin revokes Alice's access
+          ↓
+Wait 1 / 5 / 10 seconds
+          ↓
+A new private message is created
+          ↓
+Check Alice's existing WebSocket
+          ↓
+Record whether Alice receives the message
